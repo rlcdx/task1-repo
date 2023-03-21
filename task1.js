@@ -7,14 +7,14 @@ const server = http.createServer(
         switch (req.url) {
             case '/':
                 console.log('Homepage')
-                const f = fs.readFileSync('./task1-repo/display.html')
+                const f = fs.readFileSync('./test/task1-repo/display.html')
                 res.end(f)
-                break;
+            /*    break;
             case '/showlist.js':
                 console.log('showlist requested')
                 const f2 = fs.readFileSync('./task1-repo/showlist.js')
                 res.end(f2)
-                break;
+                break;*/
         }
     })
 

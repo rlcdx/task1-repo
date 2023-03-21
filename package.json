@@ -2,9 +2,5 @@
   "name": "task1-repo",
   "lockfileVersion": 3,
   "requires": true,
-  "packages": {
-    "": {
-      "name": "task1-repo"
-    }
-  }
+  "packages": {}
 }
