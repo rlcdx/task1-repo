@@ -3,20 +3,26 @@ const fs = require('node:fs')
 
 const server = http.createServer(
     function handle(req, res) {
+        console.log(req.url)
             
-        switch (req.url) {
+       switch (req.url) {
+
             case '/':
                 console.log('Homepage')
-                const f = fs.readFileSync('./test/task1-repo/display.html')
+                const f = fs.readFileSync('./public/display.html')
                 res.end(f)
-            /*    break;
-            case '/showlist.js':
-                console.log('showlist requested')
-                const f2 = fs.readFileSync('./task1-repo/showlist.js')
+                break;
+            case '/public/showlist.js':
+                const f2 = fs.readFileSync('./public/showlist.js')
                 res.end(f2)
-                break;*/
+                break;
+            case '/favicon.ico':
+                const f3 = fs.readFileSync('./public/darock.jpg')
+                res.end(f3)
+                break;
         }
-    })
+    }
+)
 
 
 /*const dis =fs.readFile('./list.txt', 'utf-8', (error1, data1) => {

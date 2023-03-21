@@ -1,8 +1,8 @@
 const fs = require('node:fs')
+/*
+const shows = fs.readFileSync('./public/list.txt').toString().split("\n");
 
-const shows = fs.readFileSync('list.txt').toString().split("\n");
-
-function wew (arg){
+function beng(arg) {
     let items = "";
     for (let i = 0; i < arg.length; i++) {
         items += `<li>${arg[i]}</li>`;
@@ -12,6 +12,8 @@ function wew (arg){
 
 document.querySelector("main").innerHTML = `
 <ul>
-${wew(shows)}
+${beng(shows)}
 </ul>
 `;
+*/
+
