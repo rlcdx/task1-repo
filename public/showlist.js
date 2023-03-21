@@ -1,19 +1,19 @@
 const fs = require('node:fs')
-/*
-const shows = fs.readFileSync('./public/list.txt').toString().split("\n");
 
-function beng(arg) {
+function showList() {
+    const text = fs.readFileSync("./list.txt", "utf-8");
+    var textByLine = text.split("\r\n")
+    console.log(textByLine)
+
     let items = "";
-    for (let i = 0; i < arg.length; i++) {
-        items += `<li>${arg[i]}</li>`;
+    for (let i = 0; i < textByLine.length; i++) {
+        items += `<li>${textByLine[i]}</li>`;
     }
     return items;
 }
 
-document.querySelector("main").innerHTML = `
-<ul>
-${beng(shows)}
-</ul>
-`;
-*/
+//let show = showList();
 
+//console.log(show);
+
+module.exports = showList;
