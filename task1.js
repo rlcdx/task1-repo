@@ -5,19 +5,19 @@ const showList = require('./showlist');
 const server = http.createServer(
     function handle(req, res) {
         console.log(req.url)
-            
-       switch (req.url) {
+
+        switch (req.url) {
 
             case '/':
-                const f = fs.readFileSync('./display.html', 'utf-8')
-                res.end(f.replace('{{listahan}}',showList()))
+                const f = fs.readFileSync('./public/display.html', 'utf-8')
+                res.end(f.replace('{{listahan}}', showList()))
                 break;
             case '/showlist.js':
-                const f2 = fs.readFileSync('./showlist.js')
+                const f2 = fs.readFileSync('./public/showlist.js')
                 res.end(f2)
                 break;
             case '/favicon.ico':
-                const f3 = fs.readFileSync('./darock.jpg')
+                const f3 = fs.readFileSync('./public/darock.jpg')
                 res.end(f3)
                 break;
         }
