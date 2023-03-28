@@ -2,7 +2,7 @@ const fs = require('node:fs')
 
 function showList() {
     const text = fs.readFileSync("./list.txt", "utf-8");
-    var textByLine = text.split("\r\n")
+    var textByLine = text.split("\n")
     console.log(textByLine)
 
     let items = "";
