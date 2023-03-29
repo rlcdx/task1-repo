@@ -7,6 +7,7 @@ const pug = require('pug')
 
 server.set('view engine','pug')
 
+server.use('/tings', express.static('public'))
 server.listen(8000, '127.0.0.1', () => {
     console.log('Server is running.')
 })
