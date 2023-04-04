@@ -2,9 +2,24 @@ doctype html
 
 html
     head
-        title= title
+        title= 'Noice'
+        
     body
-        h1= message
+        h1= 'List of TV Shows'
         ul
             each val in list
                 li= val
+        script.
+            function getSongs() {
+                fetch('http://localhost:8000/songs')
+                    .then(res => res.json())
+                    .then(data => {
+                        let resultData = data
+                        console.log(resultData)
+                        let resultDiv = document.getElementById('result');
+                        resultDiv.innerHTML = JSON.stringify(resultData, null, 2);
+                    })
+                    .catch(error => console.error(error));
+            }
+        button(type='button' onclick='getSongs()') Get All Songs
+        pre#result

@@ -1,6 +1,7 @@
 const fs = require('node:fs')
 const express = require('express')
 const server = express()
+
 server.use(express.json())
 
 let songs = JSON.parse(fs.readFileSync('./data/songs.json'))
@@ -115,11 +116,9 @@ const deleteSong = (req, res) => {
     })
 }
 
-
 exports.getAllSongs = getAllSongs
 exports.getSong = getSong
 exports.createSong = createSong
 exports.editSong = editSong
 exports.replaceSong = replaceSong
 exports.deleteSong = deleteSong
-

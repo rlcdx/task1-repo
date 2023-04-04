@@ -8,7 +8,7 @@
   "main": "showlist.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node task1.js"
+    "start": "nodemon task1.js"
   },
   "keywords": [],
   "author": "",

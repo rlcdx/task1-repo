@@ -1,9 +1,30 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title></title>
+    <title>Example</title>
   </head>
   <body>
-    <h1></h1>
+    <button id="myButton">Click me</button>
+    <script>
+      function displayData() {
+        fetch('data.json')
+          .then(response => response.json())
+          .then(data => {
+            const myList = document.createElement('ul');
+            data.forEach(item => {
+              const listItem = document.createElement('li');
+              listItem.textContent = item.name;
+              myList.appendChild(listItem);
+            });
+            document.body.appendChild(myList);
+          })
+          .catch(error => console.log(error));
+      }
+
+      window.onload = function() {
+        const button = document.getElementById('myButton');
+        button.addEventListener('click', displayData);
+      };
+    </script>
   </body>
 </html>
