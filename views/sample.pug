@@ -3,23 +3,123 @@ doctype html
 html
     head
         title= 'Noice'
-        
     body
         h1= 'List of TV Shows'
         ul
             each val in list
                 li= val
+        br
         script.
             function getSongs() {
                 fetch('http://localhost:8000/songs')
                     .then(res => res.json())
                     .then(data => {
-                        let resultData = data
+                        const resultData = data
                         console.log(resultData)
-                        let resultDiv = document.getElementById('result');
-                        resultDiv.innerHTML = JSON.stringify(resultData, null, 2);
+                        const resultDiv = document.getElementById('result')
+                        resultDiv.innerHTML = JSON.stringify(resultData.data.songs, null, 2)
                     })
+                    .catch(error => console.error(error))
+            }
+
+        script. 
+            function getSingleSong() {
+                const id = document.getElementById('songId').value
+                fetch(`http://localhost:8000/songs/${id}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        const resultData = data
+                        console.log(resultData)
+                        const resultDiv = document.getElementById('resultTwo')
+                        resultDiv.innerHTML = JSON.stringify(resultData, null, 2)
+                    })
+                    .catch(error => console.error(error))
+            }
+
+        script. 
+            function postSong() {
+                const title = document.getElementById("titleInput").value;
+                const artist = document.getElementById("artistInput").value;
+                const year = document.getElementById("yearInput").value;
+
+                fetch('http://localhost:8000/songs')
+                    .then(res => res.json())
+                    .then(data => {
+                        const resultData = data
+                        console.log(resultData)
+                        const newId = resultData.data.songs[resultData.data.songs.length - 1].id + 1
+                        const newSong = { "id": newId, "title": title, "artist": artist, "releaseYear": +year }
+                        const updatedData = resultData.data.songs.push(newSong)
+
+                        fetch('http://localhost:8000/songs', {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify(newSong) })
+                            .then(res => console.log(res))
+                            .catch(error => console.error(error));
+                    })
+                .catch(error => console.error(error));
+            }
+
+        script. 
+            function patchSong() {
+                window.location.href = "patchReq"
+            }
+
+        script. 
+            function deleteSong() {
+                const id = document.getElementById('deleteId').value
+                console.log(id)
+                fetch(`http://localhost:8000/songs/${id}`, {
+                    method: 'DELETE',
+                    headers: {'Content-Type': 'application/json'}
+                    })
+                    .then(res => {
+                        if (res.ok) {
+                            console.log('Song deleted successfully')
+                        } else if (res.status === 404) {
+                            console.error('There is no song with ID ' + id)
+                        } else {
+                            console.error('Failed to delete song')
+                        }
+                        })
                     .catch(error => console.error(error));
             }
+
         button(type='button' onclick='getSongs()') Get All Songs
         pre#result
+        br
+
+        label(for='songId') Song ID
+        input#songId(type='text')
+        br
+
+        button(type='button' onclick='getSingleSong()') Get Song with Id
+        pre#resultTwo
+        br
+
+        label(for='titleInput') Song Title
+        input#titleInput(type='text')
+        br
+        label(for='artistInput') Song Artist
+        input#artistInput(type='text')
+        br
+        label(for='yearInput') Year Released
+        input#yearInput(type='text')
+        br
+
+        button(onclick='postSong()') Add Song to List
+        br
+        br
+
+        button#patchButton(type='button' onclick='patchSong()') Edit Song Details 
+        //- input#patchId(type='button')
+        br
+        br
+
+        label(for='deleteId') Song ID to Delete
+        input#deleteId(type='text')
+        br
+        button(onclick='deleteSong()') Delete Song
+        br
+        br

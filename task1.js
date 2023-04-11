@@ -2,7 +2,6 @@ const fs = require('node:fs')
 const express = require('express')
 const showList = require('./showlist')
 const functions = require('./functions')
-const funcs = require('./funcs')
 
 const server = express()
 const pug = require('pug')
@@ -10,11 +9,15 @@ const pug = require('pug')
 server.set('view engine','pug')
 
 server.use('/tings', express.static('public'))
+// server.use(express.urlencoded())
 server.use(express.json())
 
 server.get('/', function(req, res) {
-    res.render('sample', { list : showList(), name: 'RENDERED'  }
-    )
+    res.render('sample', { list : showList() })
+})
+
+server.get('/patchReq', function(req, res) {
+    res.render('patchReq')
 })
 
 server.get('/favicon.ico', (req, res) => {
@@ -24,7 +27,7 @@ server.get('/favicon.ico', (req, res) => {
 
 server.route('/songs')
     .get(functions.getAllSongs)
-    .post(functions.createSong)
+    .post(functions.addSong)
 server.route('/songs/:id')
     .get(functions.getSong)
     .patch(functions.editSong)

@@ -14,8 +14,7 @@ const getAllSongs = (req, res) => {
     })
 }
 const getSong = (req, res) => {
-    const id = req.params.id * 1
-
+    const id = +req.params.id
     let song = songs.find(tag => tag.id === id)
 
     if (!song) {
@@ -31,12 +30,11 @@ const getSong = (req, res) => {
         }
     })
 }
-const createSong = (req, res) => {
+const addSong = (req, res) => {
     console.log(req.body)
     const newId = songs[songs.length - 1].id + 1
 
     const newSong = Object.assign({ id: newId }, req.body)
-
     songs.push(newSong)
 
     fs.writeFile('./data/songs.json', JSON.stringify(songs), (err) => {
@@ -48,7 +46,7 @@ const createSong = (req, res) => {
     })
 }
 const editSong = (req, res) => {
-    const id = req.params.id * 1
+    const id = +req.params.id
     const songToUpdate = songs.find(tag => tag.id === id)
 
     if (!songToUpdate) {
@@ -73,7 +71,7 @@ const editSong = (req, res) => {
     })
 }
 const replaceSong = (req, res) => {
-    const id = req.params.id * 1
+    const id = +req.params.id
     const changes = req.body
     const songToUpdate = songs.find(tag => tag.id === id)
 
@@ -94,7 +92,7 @@ const replaceSong = (req, res) => {
     }
 }
 const deleteSong = (req, res) => {
-    const id = req.params.id * 1
+    const id = +req.params.id
     const songToDelete = songs.find(tag => tag.id === id)
     const songIndex = songs.indexOf(songToDelete)
 
@@ -118,7 +116,7 @@ const deleteSong = (req, res) => {
 
 exports.getAllSongs = getAllSongs
 exports.getSong = getSong
-exports.createSong = createSong
+exports.addSong = addSong
 exports.editSong = editSong
 exports.replaceSong = replaceSong
 exports.deleteSong = deleteSong
