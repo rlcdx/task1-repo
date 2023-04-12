@@ -1,5 +1,3 @@
-response.setHeader('Content-Type', 'text/javascript')
-
 function getSongs() {
     fetch('http://localhost:8000/songs')
         .then(res => res.json())
@@ -71,9 +69,3 @@ function deleteSong() {
             })
         .catch(error => console.error(error));
 }
-
-exports.getSongs = getSongs
-exports.getSingleSong = getSingleSong
-exports.postSong = postSong
-exports.patchSong = patchSong
-exports.deleteSong = deleteSong

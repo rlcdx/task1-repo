@@ -5,15 +5,10 @@ doctype html
 html
     head
         title= 'Noice'
-        //- meta(name='viewport', content='width=device-width, initial-scale=1')
-        //- meta(name='content-type', content='text/html; charset=utf-8')
-        //- script(src='../public/scripts.js', type='text/javascript')
-        
+        script  
+            include scripts.js
 
     body
-        //- script. 
-        //-     include scripts.js
-        script(src='scripts.js')
         h1= 'List of TV Shows'
         ul
             each val in list
@@ -46,8 +41,7 @@ html
         br
         br
 
-        button#patchButton(type='button' onclick='patchSong()') Edit Song Details 
-        //- input#patchId(type='button')
+        button#patchButton(type='button' onclick='patchSong()') Edit Song Details
         br
         br
 
@@ -57,3 +51,4 @@ html
         button(onclick='deleteSong()') Delete Song
         br
         br
+        
