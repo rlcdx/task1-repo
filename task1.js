@@ -9,7 +9,6 @@ const pug = require('pug')
 server.set('view engine','pug')
 
 server.use('/tings', express.static('public'))
-// server.use(express.urlencoded())
 server.use(express.json())
 
 server.get('/', function(req, res) {
