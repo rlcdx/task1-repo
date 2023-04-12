@@ -1,54 +1,13 @@
-//- include scripts.js
-
 doctype html
 
 html
     head
         title= 'Noice'
-        script  
-            include scripts.js
 
     body
         h1= 'List of TV Shows'
         ul
             each val in list
                 li= val
-        br
-
-        button(type='button' onclick='getSongs()') Get All Songs
-        pre#result
-        br
-
-        label(for='songId') Song ID
-        input#songId(type='text')
-        br
-
-        button(type='button' onclick='getSingleSong()') Get Song with Id
-        pre#resultTwo
-        br
-
-        label(for='titleInput') Song Title
-        input#titleInput(type='text')
-        br
-        label(for='artistInput') Song Artist
-        input#artistInput(type='text')
-        br
-        label(for='yearInput') Year Released
-        input#yearInput(type='text')
-        br
-
-        button(onclick='postSong()') Add Song to List
-        br
-        br
-
-        button#patchButton(type='button' onclick='patchSong()') Edit Song Details
-        br
-        br
-
-        label(for='deleteId') Song ID to Delete
-        input#deleteId(type='text')
-        br
-        button(onclick='deleteSong()') Delete Song
-        br
         br
         

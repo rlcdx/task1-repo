@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>Song Editor</title>
+</head>
+
+<body>
+  <h1>Edit Song</h1>
+  <label for="songId">Enter Song ID:</label>
+  <input id="songId" type="text">
+  <button id="fetchButton">Fetch Song</button>
+  <form id="songForm" style="display:none">
+    <label for="title">Title:</label>
+    <input id="title" type="text">
+    <label for="artist">Artist:</label>
+    <input id="artist" type="text">
+    <label for="releaseYear">Release Year:</label>
+    <input id="releaseYear" type="text">
+    <button id="submitButton" type="submit">Save Changes</button>
+  </form>
+  <script>
+    const fetchButton = document.querySelector('#fetchButton')
+    const songForm = document.querySelector('#songForm')
+    const titleInput = document.querySelector('#title')
+    const artistInput = document.querySelector('#artist')
+    const yearInput = document.querySelector('#releaseYear')
+    const submitButton = document.querySelector('#submitButton')
+
+    fetchButton.addEventListener('click', () => {
+      const songId = document.querySelector('#songId').value
+      fetch('http://localhost:8000/songs')
+        .then(response => response.json())
+        .then(resultData => {
+          console.log(resultData.data.songs)
+          const song = resultData.data.songs.find(s => s.id === +songId)
+          console.log(song)
+          if (song) {
+            titleInput.value = song.title
+            artistInput.value = song.artist
+            yearInput.value = song.releaseYear
+            songForm.style.display = 'block'
+          } else {
+            alert(`Song ID ${songId} not found!`)
+          }
+        })
+    })
+
+    submitButton.addEventListener('click', event => {
+      event.preventDefault()
+      const songId = document.querySelector('#songId').value
+      const title = titleInput.value
+      const artist = artistInput.value
+      const releaseYear = +yearInput.value
+      const data = { title, artist, releaseYear }
+      fetch(`http://localhost:8000/songs/${songId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      })
+        .then(response => {
+          if (response.ok) {
+            alert(`Song ID ${songId} updated successfully!`)
+          } else {
+            alert(`Error updating song ID ${songId}.`)
+          }
+        })
+    })
+  </script>
+</body>
+
+</html>

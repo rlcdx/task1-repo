@@ -48,7 +48,7 @@ function postSong() {
 }
 
 function patchSong() {
-    window.location.href = "patchReq"
+    window.location.href = "patch-req"
 }
 
 function deleteSong() {

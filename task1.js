@@ -5,18 +5,25 @@ const functions = require('./functions')
 
 const server = express()
 const pug = require('pug')
+// const path = require('path')
+
 
 server.set('view engine','pug')
 
 server.use('/tings', express.static('public'))
+server.use('/song-reqs', express.static('public'))
 server.use(express.json())
 
 server.get('/', function(req, res) {
     res.render('sample', { list : showList() })
 })
 
-server.get('/patchReq', function(req, res) {
-    res.render('patchReq')
+server.get('/song-reqs', function(req, res) {
+    res.sendFile(__dirname + '/views/song-reqs.html')
+})
+
+server.get('/song-reqs/patch-req', function(req, res) {
+    res.sendFile(__dirname + '/views/patch-req.html')
 })
 
 server.get('/favicon.ico', (req, res) => {
@@ -32,15 +39,6 @@ server.route('/songs/:id')
     .patch(functions.editSong)
     .put(functions.replaceSong)
     .delete(functions.deleteSong)
-// server.get('/songs', (req,res) =>{
-//     console.log(jsonData)
-// })
-
-// server.get('/wawawa', (req, res) => {
-//     res.end(fetch('http://localhost:8000/songs', {
-//         method: 'GET'
-//       }).then(response => response))
-// })
 
 server.listen(8000, '127.0.0.1', () => {
     console.log('Server is running...')
