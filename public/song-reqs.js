@@ -16,9 +16,9 @@ function getSingleSong() {
         .then(res => res.json())
         .then(data => {
             const resultData = data
-            console.log(resultData)
+            console.log(resultData.data.song)
             const resultDiv = document.getElementById('resultTwo')
-            resultDiv.innerHTML = JSON.stringify(resultData, null, 2)
+            resultDiv.innerHTML = JSON.stringify(resultData.data.song, null, 2)
         })
         .catch(error => console.error(error))
 }
@@ -34,17 +34,23 @@ function postSong() {
             const resultData = data
             console.log(resultData)
             const newId = resultData.data.songs[resultData.data.songs.length - 1].id + 1
-            const newSong = { "id": newId, "title": title, "artist": artist, "releaseYear": +year }
-            const updatedData = resultData.data.songs.push(newSong)
+            if (title === '' || artist === '' || year === '') {
+                alert('Please enter a valid title, artist, and year');
+                return;
+            } else {
+                const newSong = { "id": newId, "title": title, "artist": artist, "releaseYear": +year }
+                const updatedData = resultData.data.songs.push(newSong)
 
-            fetch('http://localhost:8000/songs', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(newSong) })
-                .then(res => console.log(res))
-                .catch(error => console.error(error));
+                fetch('http://localhost:8000/songs', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(newSong)
+                })
+                    .then(res => console.log(res))
+                    .catch(error => console.error(error));
+            }
         })
-    .catch(error => console.error(error));
+        .catch(error => console.error(error));
 }
 
 function patchSong() {
@@ -53,11 +59,10 @@ function patchSong() {
 
 function deleteSong() {
     const id = document.getElementById('deleteId').value
-    console.log(id)
     fetch(`http://localhost:8000/songs/${id}`, {
         method: 'DELETE',
-        headers: {'Content-Type': 'application/json'}
-        })
+        headers: { 'Content-Type': 'application/json' }
+    })
         .then(res => {
             if (res.ok) {
                 console.log('Song deleted successfully')
@@ -66,6 +71,6 @@ function deleteSong() {
             } else {
                 console.error('Failed to delete song')
             }
-            })
+        })
         .catch(error => console.error(error));
 }

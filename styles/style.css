@@ -1,0 +1,34 @@
+body {
+    background-color: lightblue;
+    font-size: 20px;
+}
+
+h1 {
+    color: rgb(72, 72, 201);
+    font-size: 50px;
+}
+
+input[type=text] {
+    border: 2px solid rgb(8, 159, 197);
+    height: 25px;
+    box-sizing: border-box;
+}
+
+pre {
+    font-size: 15px;
+}
+
+button {
+    transition-duration: 0.4s;
+    background-color: white;
+    color: rgb(141, 20, 172);
+    border: 2px solid #1f1daa;
+    padding: 10px 20px;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+button:hover {
+    background-color: #4CAF50;
+    color: rgb(255, 255, 255);
+}

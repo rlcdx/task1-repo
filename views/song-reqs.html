@@ -1,43 +1,66 @@
 <!DOCTYPE html>
 
 <html>
-    <head>
-        <title>SONGS!</title>
-        <script src="scripts.js"></script>
-    </head>
 
-    <body>
-        <h1>Songs in History</h1>
+<head>
+    <meta charset="utf-8">
+    <title>SONGS!</title>
+    <script src="song-reqs.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Songs in History</h1>
+
+    <form onsubmit="return false">
+        <div>
+            <button type="button" onclick="getSongs()">GET ALL SONGS</button>
+            <pre id="result"></pre>
+        </div>
+
         <br>
-        <button type="button" onclick="getSongs()">Get All Songs</button>
-        <pre id="result"></pre>
+
+        <div>
+            <label for="songId">Song ID</label>
+            <input id="songId" type="text">
+            <br>
+            <button onclick="getSingleSong()">GET SONG WITH ID</button>
+            <pre id="resultTwo"></pre>
+            <br>
+        </div>
+
         <br>
-        <label for="songId">Song ID</label>
-        <input id="songId" type="text">
+
+        <div>
+            <label for="titleInput">Song Title</label>
+            <input id="titleInput" type="text">
+            <br>
+            <label for="artistInput">Song Artist</label>
+            <input id="artistInput" type="text">
+            <br>
+            <label for="yearInput">Year Released</label>
+            <input id="yearInput" type="text">
+            <br>
+            <button onclick="postSong()">ADD SONG TO LIST</button>
+        </div>
+
         <br>
-        <button type="button" onclick="getSingleSong()">Get Song with Id</button>
-        <pre id="resultTwo"></pre>
+
+        <div>
+            <button onclick="patchSong()">EDIT SONG DETAILS</button>
+            <br>
+        </div>
+
         <br>
-        <label for="titleInput">Song Title</label>
-        <input id="titleInput" type="text">
-        <br>
-        <label for="artistInput">Song Artist</label>
-        <input id="artistInput" type="text">
-        <br>
-        <label for="yearInput">Year Released</label>
-        <input id="yearInput" type="text">
-        <br>
-        <button onclick="postSong()">Add Song to List</button>
-        <br>
-        <br>
-        <button id="patchButton" type="button" onclick="patchSong()">Edit Song Details</button>
-        <br>
-        <br>
-        <label for="deleteId">Song ID to Delete</label>
-        <input id="deleteId" type="text">
-        <br>
-        <button onclick="deleteSong()">Delete Song</button>
-        <br>
-        <br>
-    </body>
+
+        <div>
+            <label for="deleteId">Song ID to Delete</label>
+            <input id="deleteId" type="text">
+            <br>
+            <button onclick="deleteSong()">DELETE SONG</button>
+            <br>
+        </div>
+    </form>
+</body>
+
 </html>

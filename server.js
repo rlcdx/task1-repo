@@ -5,13 +5,11 @@ const functions = require('./functions')
 
 const server = express()
 const pug = require('pug')
-// const path = require('path')
-
 
 server.set('view engine','pug')
 
-server.use('/tings', express.static('public'))
 server.use('/song-reqs', express.static('public'))
+server.use('/song-reqs', express.static('styles'))
 server.use(express.json())
 
 server.get('/', function(req, res) {
