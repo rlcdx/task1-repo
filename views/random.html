@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Hello World</h1>
+    <form method="POST" action="/songs">
+        <label for="title">Song Title</label>
+        <input id="title" name="title" type="text">
+        <br>
+        <label for="artist">Song Artist</label>
+        <input id="artist" name="artist" type="text">
+        <br>
+        <label for="releaseYear">Year Released</label>
+        <input id="releaseYear" name="releaseYear" type="text">
+        <br>
+        <button onclick="postSong()">ADD SONG TO LIST</button>
+    </form>
+</body>
+
+</html>

@@ -14,11 +14,21 @@ server.set('view engine','pug')
 server.use('/song-reqs', express.static('public'))
 server.use('/song-reqs', express.static('styles'))
 server.use(express.json())
+server.use(express.urlencoded({extended: true}))
 
 server.get('/', function(req, res) {
     res.render('sample', { list : showList() })
 })
 
+server.get('/random', function(req, res) {
+    res.sendFile(__dirname + '/views/random.html')
+})
+
+server.post('/random', function(req, res) {
+    console.log(req.body)
+    res.sendFile(__dirname + '/views/random.html')
+})
+    
 server.get('/song-reqs', function(req, res) {
     res.sendFile(__dirname + '/views/song-reqs.html')
 })

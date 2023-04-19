@@ -6,7 +6,6 @@ function getAllSongs() {
 
 function createSong(song) {
     return knex("songs").insert(song)
-    
 }
 
 function getSong(id) {
