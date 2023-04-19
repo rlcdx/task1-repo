@@ -1,11 +1,16 @@
 const knex = require("./knex")
 
-function createSong(song) {
-    return knex("songs").insert(song)
-}
-
 function getAllSongs() {
     return knex("songs").select("*")
+}
+
+function createSong(song) {
+    return knex("songs").insert(song)
+    
+}
+
+function getSong(id) {
+    return knex("songs").select("*").where("id", id)
 }
 
 function deleteSong(id) {
@@ -19,6 +24,7 @@ function updateSong(id, song) {
 module.exports = {
     createSong,
     getAllSongs,
+    getSong,
     deleteSong,
     updateSong
 }

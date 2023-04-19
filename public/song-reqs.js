@@ -5,7 +5,7 @@ function getSongs() {
             const resultData = data
             console.log(resultData)
             const resultDiv = document.getElementById('result')
-            resultDiv.innerHTML = JSON.stringify(resultData.data.songs, null, 2)
+            resultDiv.innerHTML = JSON.stringify(resultData, null, 2)
         })
         .catch(error => console.error(error))
 }
@@ -16,9 +16,14 @@ function getSingleSong() {
         .then(res => res.json())
         .then(data => {
             const resultData = data
-            console.log(resultData.data.song)
-            const resultDiv = document.getElementById('resultTwo')
-            resultDiv.innerHTML = JSON.stringify(resultData.data.song, null, 2)
+            console.log(resultData)
+            if (resultData.song.length === 0) {
+                alert('No song with ID ' + id);
+                return;
+            } else {
+                const resultDiv = document.getElementById('resultTwo')
+                resultDiv.innerHTML = JSON.stringify(resultData, null, 2)
+            }
         })
         .catch(error => console.error(error))
 }
@@ -33,19 +38,21 @@ function postSong() {
         .then(data => {
             const resultData = data
             console.log(resultData)
-            const newId = resultData.data.songs[resultData.data.songs.length - 1].id + 1
+            const newId = resultData.songs[resultData.songs.length - 1].id + 1
             if (title === '' || artist === '' || year === '') {
                 alert('Please enter a valid title, artist, and year');
                 return;
             } else {
                 const newSong = { "id": newId, "title": title, "artist": artist, "releaseYear": +year }
-                const updatedData = resultData.data.songs.push(newSong)
+                const updatedData = resultData.songs.push(newSong)
 
                 fetch('http://localhost:8000/songs', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(newSong)
                 })
+
+                alert('Song added to list!')
                     .then(res => console.log(res))
                     .catch(error => console.error(error));
             }

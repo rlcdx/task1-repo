@@ -10,8 +10,8 @@ fetchButton.addEventListener('click', () => {
     fetch('http://localhost:8000/songs')
         .then(response => response.json())
         .then(resultData => {
-            console.log(resultData.data.songs)
-            const song = resultData.data.songs.find(s => s.id === +songId)
+            console.log(resultData.songs)
+            const song = resultData.songs.find(s => s.id === +songId)
             console.log(song)
             if (song) {
                 titleInput.value = song.title
