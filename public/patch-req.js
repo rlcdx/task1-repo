@@ -32,7 +32,7 @@ submitButton.addEventListener('click', event => {
     const releaseYear = +yearInput.value
     const data = { id: +songId, title, artist, releaseYear }
     fetch(`http://localhost:8000/songs/${songId}`, {
-        method: 'PUT',
+        method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
     })

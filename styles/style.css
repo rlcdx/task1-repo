@@ -1,5 +1,5 @@
 body {
-    background-color: lightblue;
+    background-color: rgb(255, 255, 255);
     font-size: 20px;
 }
 
@@ -19,16 +19,20 @@ pre {
 }
 
 button {
-    transition-duration: 0.4s;
+    transition-duration: 0.3s;
     background-color: white;
     color: rgb(141, 20, 172);
     border: 2px solid #1f1daa;
-    padding: 10px 20px;
+    padding: 5px 15px;
     font-weight: bold;
     font-size: 13px;
 }
 
 button:hover {
-    background-color: #4CAF50;
+    background-color: #2483b9;
     color: rgb(255, 255, 255);
+}
+
+fieldset {
+    border-color: #1f1daa;
 }
