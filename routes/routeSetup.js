@@ -20,6 +20,11 @@ function setupSongRoutes(server) {
     res.sendFile(filePath);
   });
 
+  server.get("/test", function (req, res) {
+    const filePath = path.join(__dirname, "..", "views", "test.html");
+    res.sendFile(filePath);
+  });
+
   server.get("/song-reqs", function (req, res) {
     const filePath = path.join(__dirname, "..", "views", "song-reqs.html");
     res.sendFile(filePath);
