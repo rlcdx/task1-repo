@@ -4,13 +4,8 @@ const express = require("express");
 const { graphqlHTTP } = require("express-graphql");
 const { buildSchema } = require("graphql");
 const resolvers = require("../services/resolvers");
-<<<<<<< HEAD
 
 const server = express();
-=======
-// dsads
-const app = express();
->>>>>>> fd862518d04dc04041bdbcce5c090d27a25b0605
 
 const schema = buildSchema(`
     type Song {
