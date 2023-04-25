@@ -37,7 +37,6 @@ function postSong() {
         .then(res => res.json())
         .then(data => {
             const resultData = data
-            console.log(resultData)
             const newId = resultData.songs[resultData.songs.length - 1].id + 1
             if (title === '' || artist === '' || year === '') {
                 alert('Please enter a valid title, artist, and year');
