@@ -6,6 +6,8 @@ const pug = require('pug')
 
 server.set('view engine','pug')
 
+server.use("/song-reqs", express.static("public"));
+server.use("/song-reqs", express.static("styles"));
 server.use(express.json())
 server.use(express.urlencoded({extended: true}))
 
