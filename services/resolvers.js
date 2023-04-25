@@ -13,7 +13,7 @@ const resolvers = {
       });
     });
   },
-  song: (parent, args) => {
+  song: (args) => {
     return new Promise((resolve, reject) => {
       db.get(
         "SELECT * FROM songs WHERE id = ?",
