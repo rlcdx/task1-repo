@@ -1,22 +1,22 @@
 const sqlite3 = require("sqlite3").verbose();
-const db = new sqlite3.Database("../data/data.db");
+const db = require("./songKnex");
 
 const resolvers = {
   songs: () => {
     return new Promise((resolve, reject) => {
-      db.all("SELECT * FROM songs", (error, rows) => {
-        if (error) {
-          reject(error);
-        } else {
-          resolve(rows);
-        }
-      });
+      db.getAllSongs,
+        (error, rows) => {
+          if (error) {
+            reject(error);
+          } else {
+            resolve(rows);
+          }
+        };
     });
   },
-  song: (parent, args) => {
+  song: (args) => {
     return new Promise((resolve, reject) => {
-      db.get(
-        "SELECT * FROM songs WHERE id = ?",
+      db.getSong(args),
         [args.id],
         (error, row) => {
           if (error) {
@@ -24,38 +24,25 @@ const resolvers = {
           } else {
             resolve(row);
           }
-        }
-      );
+        };
     });
   },
   addSong: (args) => {
     return new Promise((resolve, reject) => {
       const { title, artist, releaseYear } = args;
-      db.run(
-        "INSERT INTO songs (title, artist, releaseYear) VALUES (?, ?, ?)",
+      db.createSong(args),
         [title, artist, releaseYear],
-        function (error) {
+        (error, row) => {
           if (error) {
             reject(error);
           } else {
-            db.get(
-              "SELECT * FROM songs WHERE id = ?",
-              [this.lastID],
-              (error, row) => {
-                if (error) {
-                  reject(error);
-                } else {
-                  resolve(row);
-                }
-              }
-            );
+            resolve(row);
           }
-        }
-      );
+        };
     });
   },
   updateSong: (args) => {
-    return new Promise((resolve, reject) => {
+    return new Promise(() => {
       let updateClause = "";
       let updateParams = [];
       if (args.title) {
@@ -71,38 +58,20 @@ const resolvers = {
         updateParams.push(args.releaseYear);
       }
       updateClause = updateClause.slice(0, -2);
-      db.run(
-        `UPDATE songs SET ${updateClause} WHERE id = ?`,
-        [...updateParams, args.id],
-        (error) => {
-          if (error) {
-            reject(error);
-          } else {
-            db.get(
-              "SELECT * FROM songs WHERE id = ?",
-              [args.id],
-              (error, row) => {
-                if (error) {
-                  reject(error);
-                } else {
-                  resolve(row);
-                }
-              }
-            );
-          }
-        }
-      );
+      db.updateSong(args);
     });
   },
   deleteSong: (args) => {
     return new Promise((resolve, reject) => {
-      db.run("DELETE FROM songs WHERE id = ?", [args.id], (error) => {
-        if (error) {
-          reject(error);
-        } else {
-          resolve(`Song with ID ${args.id} has been deleted`);
-        }
-      });
+      db.deleteSong(args),
+        [args.id],
+        (error) => {
+          if (error) {
+            reject(error);
+          } else {
+            resolve(`Song with ID ${args.id} has been deleted`);
+          }
+        };
     });
   },
 };
