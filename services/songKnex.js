@@ -1,6 +1,8 @@
 const knex = require("./knex")
 
 function getAllSongs() {
+    console.log("SAMPLE")
+    console.log(knex("songs").select("*"))
     return knex("songs").select("*")
 }
 
