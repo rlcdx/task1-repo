@@ -1,9 +1,11 @@
 const sqlite3 = require("sqlite3").verbose();
-const db = new sqlite3.Database("../data/data.db");
+// const db = new sqlite3.Database("../data/data.db");
+// const db = require("../services/songKnex");
 const express = require("express");
 const { graphqlHTTP } = require("express-graphql");
 const { buildSchema } = require("graphql");
 const resolvers = require("../services/resolvers");
+// const resolversTest = require("../services/resolversTest");
 
 const server = express();
 
@@ -44,4 +46,12 @@ server.use(
   })
 );
 
+// const graphqlMW = graphqlHTTP({
+//   schema: schema,
+//   rootValue: root,
+//   graphiql: true,
+// })
+
 server.listen(3000, () => console.log("Server is running"));
+
+// module.exports = graphqlMW
