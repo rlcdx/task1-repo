@@ -1,9 +1,9 @@
 const fs = require("node:fs");
-const db = require("../services/songKnex");
+const db = require("../services/prismaReqs");
 const showList = require("../showlist");
 const express = require("express");
 const path = require("path");
-const sqlite3 = require('sqlite3').verbose()
+const sqlite3 = require("sqlite3").verbose();
 
 const server = express();
 
@@ -47,8 +47,8 @@ function setupSongRoutes(server) {
   });
 
   server.get("/songs/:id", async (req, res) => {
-    const id = req.params.id;
-    const song = await db.getSong(id);
+    const id = parseInt(req.params.id);
+    const song = await db.getSongById({ id });
     if (!song) {
       return res.status(404).json({
         status: "Failed",
@@ -64,12 +64,15 @@ function setupSongRoutes(server) {
   });
 
   server.patch("/songs/:id", async (req, res) => {
+    console.log("ID: ", req.params.id);
+    console.log("body: ", req.body);
     const id = await db.updateSong(req.params.id, req.body);
     res.status(200).json({ id });
   });
 
   server.delete("/songs/:id", async (req, res) => {
-    await db.deleteSong(req.params.id);
+    const id = parseInt(req.params.id);
+    await db.deleteSong({ id });
     res.status(200).json({ success: true });
   });
 }
