@@ -1,21 +1,21 @@
 const sqlite3 = require("sqlite3").verbose();
-const rf = require("./resolverFuncs.js")
+const db = require("./prismaReqs");
 
 const resolvers = {
   songs: () => {
-    return rf.getAllSongs();
+    return db.getAllSongs();
   },
   song: (args) => {
-    return rf.getSongById(args)
+    return db.getSongById(args);
   },
-  addSong: (args) => {
-    return rf.addSong(args)
+  createSong: (args) => {
+    return db.createSong(args);
   },
   updateSong: (args) => {
-    return rf.updateSong(args)
+    return db.updateSong(args);
   },
   deleteSong: (args) => {
-    return rf.deleteSong(args)
+    return db.deleteSong(args);
   },
 };
 

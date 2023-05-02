@@ -1,11 +1,8 @@
 const sqlite3 = require("sqlite3").verbose();
-// const db = new sqlite3.Database("../data/data.db");
-// const db = require("../services/songKnex");
 const express = require("express");
 const { graphqlHTTP } = require("express-graphql");
 const { buildSchema } = require("graphql");
 const resolvers = require("../services/resolvers");
-// const resolversTest = require("../services/resolversTest");
 
 const server = express();
 
@@ -23,7 +20,7 @@ const schema = buildSchema(`
     }
     
     type Mutation {
-        addSong(title: String!, artist: String!, releaseYear: Int!): Song
+        createSong(title: String!, artist: String!, releaseYear: Int!): Song
         updateSong(id: Int!, title: String, artist: String, releaseYear: Int): Song
         deleteSong(id: Int!): String
     }
@@ -32,9 +29,9 @@ const schema = buildSchema(`
 const root = {
   songs: resolvers.songs,
   song: resolvers.song,
-  addSong: resolvers.addSong,
+  createSong: resolvers.createSong,
   updateSong: resolvers.updateSong,
-  deleteSong: resolvers.deleteSong
+  deleteSong: resolvers.deleteSong,
 };
 
 server.use(
