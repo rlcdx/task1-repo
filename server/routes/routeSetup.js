@@ -66,7 +66,7 @@ function setupSongRoutes(server) {
   server.patch("/songs/:id", async (req, res) => {
     console.log("ID: ", req.params.id);
     console.log("body: ", req.body);
-    const id = await db.updateSong(req.params.id, req.body);
+    const id = await db.updateSong(req.body);
     res.status(200).json({ id });
   });
 

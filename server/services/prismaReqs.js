@@ -43,13 +43,13 @@ async function updateSong(args) {
     data.releaseYear = args.releaseYear;
   }
   console.log("ARGS: ", args);
-  console.log("DATA: ", data);
   const song = await prisma.songs.update({
     where: {
       id: args.id,
     },
     data,
   });
+  console.log("DATA: ", data);
   console.log("SONG: ", song);
   return song;
 }
