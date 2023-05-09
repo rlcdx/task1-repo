@@ -3,7 +3,6 @@ import Test from "./pages/TestPage";
 import Songs from "./pages/Songs";
 import Home from "./pages/HomePage";
 import UpdateSong from "./pages/UpdateSong";
-// import React, { useState, useEffect } from "react";
 
 export default function App() {
   return (
@@ -12,7 +11,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/waw" element={<Test />} />
         <Route path="/songs" element={<Songs />} />
-        {/* <Route path="/update/:id" element={<UpdateSong />} /> */}
+        <Route path="/update/:id" element={<UpdateSong />} />
       </Routes>
     </BrowserRouter>
   );

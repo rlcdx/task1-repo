@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export default function Songs() {
@@ -18,7 +18,7 @@ export default function Songs() {
     });
   }, []);
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -80,9 +80,9 @@ export default function Songs() {
         {songs.map((song) => (
           <li key={song.id}>
             {song.title} - {song.artist} ({song.releaseYear})
-            {/* <button onClick={() => navigate(`/update/${song.id}`)}>
+            <button onClick={() => navigate(`/update/${song.id}`)}>
               Update
-            </button> */}
+            </button>
             <button onClick={() => deleteSong(song.id)}>Delete</button>
           </li>
         ))}
