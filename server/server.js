@@ -1,24 +1,24 @@
-const express = require('express')
-const setupSongRoutes = require('./routes/routeSetup')
-// const sqlite3 = require("sqlite3").verbose();
-// const db = new sqlite3.Database("./data/data.db");
+const express = require("express");
+const setupSongRoutes = require("./routes/routeSetup");
 
-// const { graphqlMW } = require("./routes/graphql");
+const cors = require("cors");
 
-const server = express()
-const pug = require('pug')
+const server = express();
 
-server.set('view engine','pug')
+server.set("view engine", "pug");
 
+server.use(cors());
 server.use("/song-reqs", express.static("public"));
 server.use("/song-reqs", express.static("styles"));
-server.use(express.json())
-server.use(express.urlencoded({extended: true}))
+server.use(express.json());
+server.use(express.urlencoded({ extended: true }));
 
-// server.use("/graphql", graphqlMW)
+server.get("/waw", cors(), (req, res) => {
+  res.json({ users: ["userOne", "userTwo", "userThree"] });
+});
 
-setupSongRoutes(server)
+setupSongRoutes(server);
 
-server.listen(8000, '127.0.0.1', () => {
-    console.log('Server is running...')
-})
+server.listen(8000, "127.0.0.1", () => {
+  console.log("Server is running on port 8000");
+});
